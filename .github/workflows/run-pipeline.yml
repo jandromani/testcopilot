@@ -10,9 +10,9 @@ jobs:
   run-pipeline:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository }}:latest
+      image: ghcr.io/jandromani/testcopilot:sha-64dc02fd055fda615e5b06351415b5e8d658a728
       credentials:
-        username: ${{ github.actor }}
+        username: ${{ github.actor }} 
         password: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout code

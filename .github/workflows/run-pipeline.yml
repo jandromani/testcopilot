@@ -2,7 +2,7 @@ name: Run Pipeline after Build
 
 on:
   workflow_run:
-    workflows: ["Build and Push Docker Image"]
+    workflows: ["Build and Push Docker Image"]  # Asegúrate de que este nombre coincida con el nombre del workflow de construcción.
     types:
       - completed
 

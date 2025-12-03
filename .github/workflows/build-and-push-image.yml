@@ -24,7 +24,8 @@ jobs:
       
     steps:
       - name: Checkout repository
-        uses: actions:checkout@v4
+        # ERROR CORREGIDO: Cambiado 'actions:' por 'actions/'
+        uses: actions/checkout@v4
 
       # 1. Configurar variables de registro (Registry)
       - name: Set up Docker metadata

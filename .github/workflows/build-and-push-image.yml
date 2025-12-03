@@ -18,7 +18,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_TOKEN }}  # Usa el PAT aquí
+          password: ${{ secrets.GHCR_PAT }}  # Usa el PAT aquí
 
       - name: Build Docker image
         run: docker build -t ghcr.io/${{ github.repository }}:latest .

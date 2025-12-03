@@ -1,4 +1,4 @@
-name: Pipeline: Ejecutar desde Contenedor
+name: Pipeline Ejecutar desde Contenedor
 
 on:
   workflow_dispatch: {}

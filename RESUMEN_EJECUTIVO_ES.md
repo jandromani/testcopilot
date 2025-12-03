@@ -264,7 +264,7 @@ node scripts/run-pipeline.js tests/fixtures/example-spec.json
 # 3. Conectar
 # 4. En VSCode:
 
-$env:OPENROUTER_API_KEY = "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"
+$env:OPENROUTER_API_KEY = "sk-or-v1-YOUR-KEY-HERE"
 $env:ENABLE_LLM = "1"
 node scripts/run-pipeline.js tests/fixtures/example-spec.json
 

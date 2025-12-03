@@ -3,7 +3,7 @@ name: Build & Push Docker Image
 on:
   push:
     branches:
-      - main
+      - master
     # Opcional: solo correr si el Dockerfile o archivos relacionados cambian
     paths:
       - 'Dockerfile'

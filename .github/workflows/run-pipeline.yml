@@ -1,46 +1,22 @@
-name: Pipeline Ejecutar desde Contenedor
+name: Run Pipeline after Build
 
 on:
-  workflow_dispatch: {}
-  push:
-    branches:
-      - master
+  workflow_run:
+    workflows: ["Build and Push Docker Image"]
+    types:
+      - completed
 
 jobs:
   run-pipeline:
-    # Definimos la imagen Docker que debe usar este job
-    container: 
+    runs-on: ubuntu-latest
+    container:
       image: ghcr.io/${{ github.repository }}:latest
       credentials:
-        # CRÍTICO: Usamos el token por defecto para descargar la imagen de GHCR (imagen privada)
-        username: ${{ github.actor }} 
+        username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    
-    runs-on: ubuntu-latest # Este es el host que ejecutará el contenedor
-    
-    # CRÍTICO: Inyectar la clave API y variables de entorno en el contenedor
-    env:
-      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }} 
-      ENABLE_LLM: '1'
-      OPENROUTER_API_URL: 'https://api.openrouter.ai/v1/chat/completions'
-
     steps:
-      - name: 1. Checkout del código fuente
+      - name: Checkout code
         uses: actions/checkout@v4
-      
-      - name: 2. Ejecutar diagnósticos DENTRO del contenedor
-        run: node scripts/vscode-env-diagnostics.js
 
-      - name: 3. Ejecutar pipeline principal DENTRO del contenedor
+      - name: Run pipeline
         run: node scripts/run-pipeline.js tests/fixtures/example-spec.json
-        
-      - name: 4. Limpieza y subida de artifacts
-        run: |
-          echo "Contents of state/"
-          ls -la state || true
-
-      - name: Upload state artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: worldminiapp-state
-          path: state/**

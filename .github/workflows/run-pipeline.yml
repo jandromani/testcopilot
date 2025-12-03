@@ -8,16 +8,17 @@ on:
 
 jobs:
   run-pipeline:
-    # 🚨 Rol: CONSUMIR Y EJECUTAR la imagen en GHCR
+    # Definimos la imagen Docker que debe usar este job
     container: 
       image: ghcr.io/${{ github.repository }}:latest
       credentials:
-        # Se autentica para descargar la imagen privada
+        # CRÍTICO: Usamos el token por defecto para descargar la imagen de GHCR (imagen privada)
         username: ${{ github.actor }} 
         password: ${{ secrets.GITHUB_TOKEN }}
     
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Este es el host que ejecutará el contenedor
     
+    # CRÍTICO: Inyectar la clave API y variables de entorno en el contenedor
     env:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }} 
       ENABLE_LLM: '1'

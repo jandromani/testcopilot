@@ -1,4 +1,4 @@
-name: Run Pipeline CI
+name: Pipeline: Ejecutar desde Contenedor
 
 on:
   workflow_dispatch: {}
